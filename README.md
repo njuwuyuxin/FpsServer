@@ -1,13 +1,9 @@
-## Minihttpd
+## FpsServer
 ---
-一个Linux下C++轻量化HTTP服务器，用于学习网络通信，理解Http服务器原理等
+一个Linux下C++实现的FPS游戏服务器，造轮子学习一下
 
-- B/S模型
-- 使用epoll进行并发处理（ET模式）
+- 使用epoll进行TCP并发处理（ET模式）
 - 半连接半反应堆线程池,信号量+自旋锁保证线程同步（旧版本使用互斥锁）
-- HTTP报文解析 —— GET/POST
-- 基于Controller的微服务框架
-- Webbench测试支持**上万并发连接**
 - 使用libconfig对服务器运行参数高度配置
 - 异步日志输出模块，记录服务器运行状态，支持日志信息级别筛选
 
@@ -21,6 +17,7 @@
 
 ### 库依赖
 - libconfig
+- uuid
 
 ### 编译
 首先确保libconfig全局安装
@@ -28,6 +25,8 @@
 头文件在`usr/local/include`
 
 库文件在`usr/local/lib`
+
+uuid可使用apt安装`sudo apt-get install uuid-dev`
 
 之后新建一个构建目录，并进入
 ```
