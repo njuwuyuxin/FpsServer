@@ -12,6 +12,8 @@ public:
     Request(string raw_data);
     const unordered_map<string,string>& getHead();
     const unordered_map<string,string>& getBody();
+    string getHeadItem(string key) const;
+    string getBodyItem(string key) const;
 private:
     unordered_map<string,string> head;
     unordered_map<string,string> body;

@@ -2,6 +2,8 @@
 
 Server::Server():thread_pool(this,8){
     load_config("../Serverconf.cfg");
+    request_handler.init();
+    request_handler.bind(this);
     startup();
     thread_pool.init(work_thread_count);             //启动工作线程
     Log::init(log_path,info_on,debug_on,warn_on,info_on);
@@ -148,8 +150,9 @@ void Server::accept_request(int client_sock, Server* t)
     read(client_sock,(void*)buf,1024);
     string req(buf);
     Request request(req);
-    send(client,req.c_str(),req.size(),0);
-    close(client);
+    t->request_handler.handleRequest(request,client_sock);
+    // send(client,req.c_str(),req.size(),0);
+    // close(client);
 }
 
 void Server::add_epoll_fd(int event_fd){

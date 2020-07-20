@@ -26,6 +26,8 @@
 #include "request/Request.h"
 #include "log/Log.h"
 #include "thread/ThreadPool.h"
+#include "handler/Handler.h"
+#include "room/Room.h"
 
 using namespace std;
 using namespace libconfig;
@@ -47,6 +49,11 @@ private:
     int work_thread_count;                              //工作线程数
     int epollfd;                                        //epoll文件描述符
     unsigned int request_queue_length;                  //请求队列长度，即最大可同时处理请求
+    
+    Handler request_handler;                            //请求处理句柄
+    /*Room相关*/
+    unordered_map<string,Room*> rooms;
+    
     /*Log模块相关参数*/
     string log_path;                                    //log输出目录
     bool info_on;

@@ -49,3 +49,17 @@ const unordered_map<string,string>& Request::getHead(){
 const unordered_map<string,string>& Request::getBody(){
     return body;
 }
+string Request::getHeadItem(string key) const{
+    auto iter = head.find(key);
+    if(iter!=head.end())
+        return iter->second;
+    else
+        return "";
+}
+string Request::getBodyItem(string key) const{
+    auto iter = body.find(key);
+    if(iter!=body.end())
+        return iter->second;
+    else
+        return "";
+}
