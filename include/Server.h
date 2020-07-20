@@ -23,6 +23,7 @@
 #include <regex>
 #include <libconfig.h++>
 
+#include "request/Request.h"
 #include "log/Log.h"
 #include "thread/ThreadPool.h"
 

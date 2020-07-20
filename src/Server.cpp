@@ -147,7 +147,7 @@ void Server::accept_request(int client_sock, Server* t)
     char buf[1024];
     read(client_sock,(void*)buf,1024);
     string req(buf);
-
+    Request request(req);
     send(client,req.c_str(),req.size(),0);
     close(client);
 }
