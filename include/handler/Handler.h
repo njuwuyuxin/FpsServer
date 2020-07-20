@@ -12,13 +12,13 @@ class Server;
 class Handler{
 public:
     Handler();
-    void handleRequest(const Request& req,int sock);
+    void handle_request(const Request& req,int sock);
     void init();
     void bind(Server* s);
 private:
     Server* server;         //绑定的server实例
     unordered_map<string,CMF> handler_map;
-    void handleCreateRoom(const Request& req,int sock);
+    void handle_create_room(const Request& req,int sock);
 };
 
 #endif

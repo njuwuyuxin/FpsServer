@@ -150,9 +150,7 @@ void Server::accept_request(int client_sock, Server* t)
     read(client_sock,(void*)buf,1024);
     string req(buf);
     Request request(req);
-    t->request_handler.handleRequest(request,client_sock);
-    // send(client,req.c_str(),req.size(),0);
-    // close(client);
+    t->request_handler.handle_request(request,client_sock);
 }
 
 void Server::add_epoll_fd(int event_fd){

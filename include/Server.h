@@ -35,6 +35,7 @@ using namespace libconfig;
 const int MAX_EVENT_NUMBER = 10000;
 
 class Server{
+    friend class Handler;
 public:
     Server();
     ~Server();
@@ -42,6 +43,7 @@ public:
     inline u_short get_port(){ return port; };
     void start_listen();
     static void accept_request(int client_sock,Server* t);
+
 private:
     int server_sock;
     u_short port;
@@ -52,7 +54,7 @@ private:
     
     Handler request_handler;                            //请求处理句柄
     /*Room相关*/
-    unordered_map<string,Room*> rooms;
+    unordered_map<string,Room*> rooms;                  //每个房间对应一个uuid
     
     /*Log模块相关参数*/
     string log_path;                                    //log输出目录

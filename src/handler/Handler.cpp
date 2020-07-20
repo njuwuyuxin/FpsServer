@@ -5,14 +5,14 @@ Handler::Handler(){
 }
 
 void Handler::init(){
-    handler_map.insert(pair<string,CMF>("CreateRoom",&Handler::handleCreateRoom));
+    handler_map.insert(pair<string,CMF>("CreateRoom",&Handler::handle_create_room));
 }
 
 void Handler::bind(Server* s){
     server = s;
 }
 
-void Handler::handleRequest(const Request& req,int sock){
+void Handler::handle_request(const Request& req,int sock){
     string function_name = req.getHeadItem("Function");
     if(function_name==""){
         Log::log("bad request",ERROR);
@@ -27,9 +27,12 @@ void Handler::handleRequest(const Request& req,int sock){
     (this->*func)(req,sock);
 }
 
-void Handler::handleCreateRoom(const Request& req,int sock){
+void Handler::handle_create_room(const Request& req,int sock){
     Log::log("receive CreateRoom request",DEBUG);
-    string resp = "create success";
+    string username = req.getBodyItem("Username");
+    Room* new_room = new Room(username);
+    server->rooms.insert(pair<string,Room*>(new_room->get_room_id(),new_room));
+    string resp = "room_id:"+new_room->get_room_id();
     send(sock,resp.c_str(),resp.size(),0);
     close(sock);
 }

@@ -2,6 +2,7 @@
 #define ROOM_H
 #include <string>
 #include <uuid/uuid.h>
+#include <sstream>
 #include <vector>
 #include "../log/Log.h"
 using namespace std;
